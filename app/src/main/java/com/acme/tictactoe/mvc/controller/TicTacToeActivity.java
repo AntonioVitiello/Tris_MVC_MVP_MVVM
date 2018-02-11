@@ -31,7 +31,7 @@ public class TicTacToeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tictactoe);
+        setContentView(R.layout.mvc_tictactoe);
         winnerPlayerLabel = (TextView) findViewById(R.id.winnerPlayerLabel);
         winnerPlayerViewGroup = findViewById(R.id.winnerPlayerViewGroup);
         playerTurnViewGroup = findViewById(R.id.playerTurnViewGroup);
@@ -47,7 +47,7 @@ public class TicTacToeActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_tictactoe, menu);
+        inflater.inflate(R.menu.mvc_menu_tictactoe, menu);
         return true;
     }
     @Override
