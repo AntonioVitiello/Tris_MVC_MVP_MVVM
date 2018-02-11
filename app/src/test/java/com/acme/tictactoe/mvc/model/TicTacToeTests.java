@@ -1,6 +1,4 @@
-package com.acme.tictactoe.model;
-
-import android.os.Build;
+package com.acme.tictactoe.mvc.model;
 
 import org.junit.Before;
 import org.junit.Test;

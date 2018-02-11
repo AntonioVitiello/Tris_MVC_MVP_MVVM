@@ -1,4 +1,4 @@
-package com.acme.tictactoe.controller;
+package com.acme.tictactoe.mvc.controller;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,8 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.acme.tictactoe.R;
-import com.acme.tictactoe.model.Board;
-import com.acme.tictactoe.model.Player;
+import com.acme.tictactoe.mvc.model.Board;
+import com.acme.tictactoe.mvc.model.Player;
 
 public class TicTacToeActivity extends AppCompatActivity {
 
@@ -24,6 +24,9 @@ public class TicTacToeActivity extends AppCompatActivity {
     private ViewGroup buttonGrid;
     private View winnerPlayerViewGroup;
     private TextView winnerPlayerLabel;
+    private View playerTurnViewGroup;
+    private TextView playerTurnLabel;
+    private View gameOverViewGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +34,14 @@ public class TicTacToeActivity extends AppCompatActivity {
         setContentView(R.layout.tictactoe);
         winnerPlayerLabel = (TextView) findViewById(R.id.winnerPlayerLabel);
         winnerPlayerViewGroup = findViewById(R.id.winnerPlayerViewGroup);
+        playerTurnViewGroup = findViewById(R.id.playerTurnViewGroup);
+        playerTurnLabel = findViewById(R.id.playerTurnLabel);
+        gameOverViewGroup = findViewById(R.id.gameOverViewGroup);
+
         buttonGrid = (ViewGroup) findViewById(R.id.buttonGrid);
 
         model = new Board();
+        playerTurnLabel.setText(model.getCurrentTurn().toString());
     }
 
     @Override
@@ -69,16 +77,27 @@ public class TicTacToeActivity extends AppCompatActivity {
             if (model.getWinner() != null) {
                 winnerPlayerLabel.setText(playerThatMoved.toString());
                 winnerPlayerViewGroup.setVisibility(View.VISIBLE);
+                playerTurnViewGroup.setVisibility(View.GONE);
+            } else {
+                if(model.isGameOver()){
+                    playerTurnViewGroup.setVisibility(View.GONE);
+                    gameOverViewGroup.setVisibility(View.VISIBLE);
+                } else {
+                    playerTurnLabel.setText(model.getCurrentTurn().toString());
+                }
             }
         }
 
     }
 
     private void reset() {
+        playerTurnViewGroup.setVisibility(View.VISIBLE);
         winnerPlayerViewGroup.setVisibility(View.GONE);
+        gameOverViewGroup.setVisibility(View.GONE);
         winnerPlayerLabel.setText("");
 
         model.restart();
+        playerTurnLabel.setText(model.getCurrentTurn().toString());
 
         for( int i = 0; i < buttonGrid.getChildCount(); i++ ) {
             ((Button) buttonGrid.getChildAt(i)).setText("");

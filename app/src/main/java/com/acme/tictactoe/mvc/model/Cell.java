@@ -1,4 +1,4 @@
-package com.acme.tictactoe.model;
+package com.acme.tictactoe.mvc.model;
 
 /**
  * Created by ericmaxwell on 1/19/17.
@@ -8,11 +8,11 @@ public class Cell {
 
     private Player value;
 
-    public Player getValue() {
+    public Player getPlayer() {
         return value;
     }
 
-    public void setValue(Player value) {
+    public void setPlayer(Player value) {
         this.value = value;
     }
 }
