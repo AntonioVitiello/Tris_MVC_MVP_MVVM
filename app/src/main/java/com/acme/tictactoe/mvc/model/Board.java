@@ -63,7 +63,9 @@ public class Board {
     public boolean isGameOver() {
         for(int i = 0; i < 3; i++) {
             for(int j = 0; j < 3; j++) {
-                if(cells[i][j].getPlayer() == null) return false ;
+                if(cells[i][j].getPlayer() == null) {
+                    return false;
+                }
             }
         }
         return true;
