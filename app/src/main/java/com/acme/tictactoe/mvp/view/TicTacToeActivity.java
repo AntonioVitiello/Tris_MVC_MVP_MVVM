@@ -12,9 +12,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.acme.tictactoe.R;
+import com.acme.tictactoe.mvp.MVPContract;
 import com.acme.tictactoe.mvp.presenter.TicTacToePresenter;
 
-public class TicTacToeActivity extends AppCompatActivity implements TicTacToeView {
+public class TicTacToeActivity extends AppCompatActivity implements MVPContract.View {
 
     private static String TAG = TicTacToeActivity.class.getName();
 
@@ -22,34 +23,23 @@ public class TicTacToeActivity extends AppCompatActivity implements TicTacToeVie
     private View winnerPlayerViewGroup;
     private TextView winnerPlayerLabel;
 
-    TicTacToePresenter presenter = new TicTacToePresenter(this);
+    MVPContract.Presenter presenter;
+    private View playerTurnViewGroup;
+    private TextView playerTurnLabel;
+    private View gameOverViewGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mvp_tictactoe);
-        winnerPlayerLabel = (TextView) findViewById(R.id.winnerPlayerLabel);
+        winnerPlayerLabel = findViewById(R.id.winnerPlayerLabel);
         winnerPlayerViewGroup = findViewById(R.id.winnerPlayerViewGroup);
-        buttonGrid = (ViewGroup) findViewById(R.id.buttonGrid);
-        presenter.onCreate();
-    }
+        buttonGrid = findViewById(R.id.buttonGrid);
+        playerTurnViewGroup = findViewById(R.id.playerTurnViewGroup);
+        playerTurnLabel = findViewById(R.id.playerTurnLabel);
+        gameOverViewGroup = findViewById(R.id.gameOverViewGroup);
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        presenter.onPause();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        presenter.onResume();
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        presenter.onDestroy();
+        presenter = new TicTacToePresenter(this);
     }
 
     @Override
@@ -69,16 +59,18 @@ public class TicTacToeActivity extends AppCompatActivity implements TicTacToeVie
         }
     }
 
-    public void onCellClicked(View v) {
-
+    /**
+     * Button onClick event in mvp_tictactoe.xml
+     * @param v
+     */
+    public void onClickCell(View v) {
         Button button = (Button) v;
         String tag = button.getTag().toString();
         int row = Integer.valueOf(tag.substring(0,1));
         int col = Integer.valueOf(tag.substring(1,2));
         Log.i(TAG, "Click Row: [" + row + "," + col + "]");
 
-        presenter.onButtonSelected(row, col);
-
+        presenter.playerMove(row, col);
     }
 
     @Override
@@ -89,19 +81,34 @@ public class TicTacToeActivity extends AppCompatActivity implements TicTacToeVie
         }
     }
 
+    @Override
+    public void showWinner(String winnerPlayerText) {
+        winnerPlayerLabel.setText(winnerPlayerText);
+        playerTurnViewGroup.setVisibility(View.GONE);
+        gameOverViewGroup.setVisibility(View.GONE);
+        winnerPlayerViewGroup.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showPlayerTurn(String playerTurnText) {
+        playerTurnLabel.setText(playerTurnText);
+        playerTurnViewGroup.setVisibility(View.VISIBLE);
+        gameOverViewGroup.setVisibility(View.GONE);
+        winnerPlayerViewGroup.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showGameOver() {
+        playerTurnViewGroup.setVisibility(View.GONE);
+        gameOverViewGroup.setVisibility(View.VISIBLE);
+        winnerPlayerViewGroup.setVisibility(View.GONE);
+    }
+
+    @Override
     public void clearButtons() {
         for( int i = 0; i < buttonGrid.getChildCount(); i++ ) {
             ((Button) buttonGrid.getChildAt(i)).setText("");
         }
     }
 
-    public void showWinner(String winningPlayerDisplayLabel) {
-        winnerPlayerLabel.setText(winningPlayerDisplayLabel);
-        winnerPlayerViewGroup.setVisibility(View.VISIBLE);
-    }
-
-    public void clearWinnerDisplay() {
-        winnerPlayerViewGroup.setVisibility(View.GONE);
-        winnerPlayerLabel.setText("");
-    }
 }

@@ -61,7 +61,7 @@ public class TicTacToeActivity extends AppCompatActivity {
         }
     }
 
-    public void onCellClicked(View v) {
+    public void onClickCell(View v) {
 
         Button button = (Button) v;
 

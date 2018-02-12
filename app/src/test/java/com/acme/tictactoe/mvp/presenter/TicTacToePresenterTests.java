@@ -1,8 +1,6 @@
 package com.acme.tictactoe.mvp.presenter;
 
 
-import com.acme.tictactoe.mvp.view.TicTacToeView;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,7 +28,7 @@ public class TicTacToePresenterTests {
     }
 
     private void clickAndAssertValueAt(int row, int col, String expectedValue) {
-        presenter.onButtonSelected(row, col);
+        presenter.playerMove(row, col);
         verify(view).setButtonText(row, col, expectedValue);
     }
 

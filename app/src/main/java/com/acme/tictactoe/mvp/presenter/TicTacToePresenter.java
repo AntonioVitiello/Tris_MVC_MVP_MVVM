@@ -1,40 +1,22 @@
 package com.acme.tictactoe.mvp.presenter;
 
+import com.acme.tictactoe.mvp.MVPContract;
 import com.acme.tictactoe.mvp.model.Board;
 import com.acme.tictactoe.mvp.model.Player;
-import com.acme.tictactoe.mvp.view.TicTacToeView;
 
-public class TicTacToePresenter implements Presenter {
+public class TicTacToePresenter implements MVPContract.Presenter {
 
-    private TicTacToeView view;
+    private MVPContract.View view;
     private Board model;
 
-    public TicTacToePresenter(TicTacToeView view) {
+    public TicTacToePresenter(MVPContract.View view) {
         this.view = view;
         this.model = new Board();
+        view.showPlayerTurn(model.getCurrentTurn().toString());
     }
 
     @Override
-    public void onCreate() {
-        model = new Board();
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onDestroy() {
-
-    }
-
-    public void onButtonSelected(int row, int col) {
+    public void playerMove(int row, int col) {
         Player playerThatMoved = model.mark(row, col);
 
         if(playerThatMoved != null) {
@@ -42,15 +24,21 @@ public class TicTacToePresenter implements Presenter {
 
             if (model.getWinner() != null) {
                 view.showWinner(playerThatMoved.toString());
+            } else {
+                if(model.isGameOver()){
+                    view.showGameOver();
+                } else {
+                    view.showPlayerTurn(model.getCurrentTurn().toString());
+                }
             }
         }
     }
 
+    @Override
     public void onResetSelected() {
-        view.clearWinnerDisplay();
         view.clearButtons();
+        view.showPlayerTurn(model.getCurrentTurn().toString());
         model.restart();
     }
-
 
 }

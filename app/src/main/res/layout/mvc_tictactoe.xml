@@ -22,57 +22,57 @@
 
         <Button
             android:tag="00"
-            android:onClick="onCellClicked"
+            android:onClick="onClickCell"
             style="@style/tictactoebutton"
             tools:text="X"
             />
 
         <Button
             android:tag="01"
-            android:onClick="onCellClicked"
+            android:onClick="onClickCell"
             style="@style/tictactoebutton"
             tools:text="O"
             />
 
         <Button
             android:tag="02"
-            android:onClick="onCellClicked"
+            android:onClick="onClickCell"
             style="@style/tictactoebutton"
             />
 
         <Button
             android:tag="10"
-            android:onClick="onCellClicked"
+            android:onClick="onClickCell"
             style="@style/tictactoebutton"
             />
 
         <Button
             android:tag="11"
-            android:onClick="onCellClicked"
+            android:onClick="onClickCell"
             style="@style/tictactoebutton"
             />
 
         <Button
             android:tag="12"
-            android:onClick="onCellClicked"
+            android:onClick="onClickCell"
             style="@style/tictactoebutton"
             />
 
         <Button
             android:tag="20"
-            android:onClick="onCellClicked"
+            android:onClick="onClickCell"
             style="@style/tictactoebutton"
             />
 
         <Button
             android:tag="21"
-            android:onClick="onCellClicked"
+            android:onClick="onClickCell"
             style="@style/tictactoebutton"
             />
 
         <Button
             android:tag="22"
-            android:onClick="onCellClicked"
+            android:onClick="onClickCell"
             style="@style/tictactoebutton"
             />
 
