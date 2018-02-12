@@ -1,4 +1,4 @@
-package com.acme.tictactoe;
+package com.acme.tictactoe.mvc;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.acme.tictactoe", appContext.getPackageName());
+        assertEquals("com.acme.mvc_tictactoe", appContext.getPackageName());
     }
 }
