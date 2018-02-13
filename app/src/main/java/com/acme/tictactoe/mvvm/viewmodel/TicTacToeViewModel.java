@@ -17,7 +17,9 @@ public class TicTacToeViewModel implements MVVMContract.ViewModel {
     public final ObservableArrayMap<String, String> cells = new ObservableArrayMap<>();
     public final ObservableField<String> winner = new ObservableField<>();
     public final ObservableField<String> currentTurn = new ObservableField<>();
-    public final ObservableField<Boolean> gemeOver = new ObservableField<>();
+    public final ObservableField<Boolean> gameOver = new ObservableField<>();
+
+    public final ObservableField<Boolean> playerTurnVisibility = new ObservableField<>();
 
 
     public TicTacToeViewModel() {
@@ -44,6 +46,9 @@ public class TicTacToeViewModel implements MVVMContract.ViewModel {
 
     }
 
+    /**
+     * RESET event raised by OptionsMenu
+     */
     public void onResetSelected() {
         model.restart();
         winner.set(null);
@@ -61,22 +66,22 @@ public class TicTacToeViewModel implements MVVMContract.ViewModel {
 
         if(playerThatMoved != null) {
 
-            // Player(OX) moved: set ObservableArrayMap cells
+            // Player(OX) moved: update the observable map with the current model state
             String cellsKey = Integer.toString(row) + Integer.toString(col); //example: cellsKey="00" or cellsKey="22"...
             String cellsValue = playerThatMoved == null ? null : playerThatMoved.toString();
             cells.put(cellsKey, cellsValue);
 
             if (model.getWinner() != null) {
-                // (OX) Win this game!
+                // Player(OX) Win this game!
                 winner.set(model.getWinner().toString());
                 currentTurn.set(null);
             } else if(model.isGameOver()){
-                    // GAME OVER, Press RESET to start a new game: set ObservableField(s)
+                    // GAME OVER, Press RESET to start a new game: update the observable fields with the current model state
                     currentTurn.set(null);
-                    gemeOver.set(Boolean.TRUE);
+                    gameOver.set(Boolean.TRUE);
                 } else {
-                    // (OX) Now is your turn: set ObservableField(s)
-                    gemeOver.set(Boolean.FALSE);
+                    // Player(OX) Now is your turn: update the observable fields with the current model state
+                    gameOver.set(Boolean.FALSE);
                     winner.set(null);
                     currentTurn.set(model.getCurrentTurn().toString());
                 }
