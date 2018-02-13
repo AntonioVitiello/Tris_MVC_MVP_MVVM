@@ -5,7 +5,7 @@
 
     <data>
         <import type="android.view.View" />
-        <variable name="viewModel" type="com.acme.tictactoe.mvvm.viewmodel.TicTacToeViewModel" />
+        <variable name="myViewModel" type="com.acme.tictactoe.mvvm.viewmodel.TicTacToeViewModel" />
     </data>
 
     <LinearLayout
@@ -29,48 +29,48 @@
 
             <Button
                 style="@style/tictactoebutton"
-                android:onClick="@{() -> viewModel.onClickCell(0,0)}"
-                android:text='@{viewModel.cells["00"]}' />
+                android:onClick="@{() -> myViewModel.onClickCell(0,0)}"
+                android:text='@{myViewModel.cells["00"]}' />
 
             <Button
                 style="@style/tictactoebutton"
-                android:onClick="@{() -> viewModel.onClickCell(0,1)}"
-                android:text='@{viewModel.cells["01"]}' />
+                android:onClick="@{() -> myViewModel.onClickCell(0,1)}"
+                android:text='@{myViewModel.cells["01"]}' />
 
             <Button
                 style="@style/tictactoebutton"
-                android:onClick="@{() -> viewModel.onClickCell(0,2)}"
-                android:text='@{viewModel.cells["02"]}' />
+                android:onClick="@{() -> myViewModel.onClickCell(0,2)}"
+                android:text='@{myViewModel.cells["02"]}' />
 
             <Button
                 style="@style/tictactoebutton"
-                android:onClick="@{() -> viewModel.onClickCell(1,0)}"
-                android:text='@{viewModel.cells["10"]}' />
+                android:onClick="@{() -> myViewModel.onClickCell(1,0)}"
+                android:text='@{myViewModel.cells["10"]}' />
 
             <Button
                 style="@style/tictactoebutton"
-                android:onClick="@{() -> viewModel.onClickCell(1,1)}"
-                android:text='@{viewModel.cells["11"]}' />
+                android:onClick="@{() -> myViewModel.onClickCell(1,1)}"
+                android:text='@{myViewModel.cells["11"]}' />
 
             <Button
                 style="@style/tictactoebutton"
-                android:onClick="@{() -> viewModel.onClickCell(1,2)}"
-                android:text='@{viewModel.cells["12"]}' />
+                android:onClick="@{() -> myViewModel.onClickCell(1,2)}"
+                android:text='@{myViewModel.cells["12"]}' />
 
             <Button
                 style="@style/tictactoebutton"
-                android:onClick="@{() -> viewModel.onClickCell(2,0)}"
-                android:text='@{viewModel.cells["20"]}' />
+                android:onClick="@{() -> myViewModel.onClickCell(2,0)}"
+                android:text='@{myViewModel.cells["20"]}' />
 
             <Button
                 style="@style/tictactoebutton"
-                android:onClick="@{() -> viewModel.onClickCell(2,1)}"
-                android:text='@{viewModel.cells["21"]}' />
+                android:onClick="@{() -> myViewModel.onClickCell(2,1)}"
+                android:text='@{myViewModel.cells["21"]}' />
 
             <Button
                 style="@style/tictactoebutton"
-                android:onClick="@{() -> viewModel.onClickCell(2,2)}"
-                android:text='@{viewModel.cells["22"]}' />
+                android:onClick="@{() -> myViewModel.onClickCell(2,2)}"
+                android:text='@{myViewModel.cells["22"]}' />
 
         </GridLayout>
 
@@ -80,7 +80,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="@{viewModel.winner != null ? View.VISIBLE : View.GONE}"
+            android:visibility="@{myViewModel.winner != null ? View.VISIBLE : View.GONE}"
             >
 
             <TextView
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:textSize="40sp"
-                android:text="@{viewModel.winner}"
+                android:text="@{myViewModel.winner}"
                 tools:text="X" />
 
             <TextView
@@ -106,7 +106,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="@{viewModel.currentTurn == null ? View.GONE : View.VISIBLE}"
+            android:visibility="@{myViewModel.currentTurn == null ? View.GONE : View.VISIBLE}"
             tools:visibility="visible"
             >
 
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:layout_margin="20dp"
-                android:text="@{viewModel.currentTurn}"
+                android:text="@{myViewModel.currentTurn}"
                 tools:text="X" />
 
             <TextView
@@ -133,7 +133,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="@{viewModel.gemeOver != null ? View.VISIBLE : View.GONE}"
+            android:visibility="@{myViewModel.gemeOver != null ? View.VISIBLE : View.GONE}"
             >
 
             <TextView

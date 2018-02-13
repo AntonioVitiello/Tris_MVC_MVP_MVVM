@@ -17,14 +17,20 @@ import com.acme.tictactoe.mvvm.viewmodel.TicTacToeViewModel;
 
 public class TicTacToeActivity extends AppCompatActivity {
 
-    TicTacToeViewModel viewModel = new TicTacToeViewModel();
+    //non usare l'interfaccia MVVMContract.ViewModel perchè mvvm_tictactoe.xml accede alle sue variabili direttamente
+    //come ad esempio viewModel.cells,  a meno di non aggiungere TUTTI i getter e setter ovviamente
+    private TicTacToeViewModel viewModel = new TicTacToeViewModel();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Android Data Binding
         MvvmTictactoeBinding binding = DataBindingUtil.setContentView(this, R.layout.mvvm_tictactoe);
-        binding.setViewModel(viewModel);
+
+        // Valorizing myViewModel data in mvvm_tictactoe.xml :
+        // <data> <variable name="myViewModel" type="com.acme.tictactoe.mvvm.viewmodel.TicTacToeViewModel" /> ...
+        binding.setMyViewModel(viewModel);
 
         viewModel.onCreate();
     }
