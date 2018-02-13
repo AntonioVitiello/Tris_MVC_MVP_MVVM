@@ -48,7 +48,7 @@ public class Board {
 
         if(isValid(row, col)) {
 
-            cells[row][col].setValue(currentTurn);
+            cells[row][col].setPlayer(currentTurn);
             playerThatMoved = currentTurn;
 
             if(isWinningMoveByPlayer(currentTurn, row, col)) {
@@ -65,7 +65,7 @@ public class Board {
     }
 
     public Player valueAtCell(int row, int col) {
-        return cells[row][col].getValue();
+        return cells[row][col].getPlayer();
     }
 
     public Player getWinner() {
@@ -97,7 +97,7 @@ public class Board {
     }
 
     private boolean isCellValueAlreadySet(int row, int col) {
-        return cells[row][col].getValue() != null;
+        return cells[row][col].getPlayer() != null;
     }
 
 
@@ -111,24 +111,37 @@ public class Board {
      */
     private boolean isWinningMoveByPlayer(Player player, int currentRow, int currentCol) {
 
-        return (cells[currentRow][0].getValue() == player         // 3-in-the-row
-                && cells[currentRow][1].getValue() == player
-                && cells[currentRow][2].getValue() == player
-                || cells[0][currentCol].getValue() == player      // 3-in-the-column
-                && cells[1][currentCol].getValue() == player
-                && cells[2][currentCol].getValue() == player
+        return (cells[currentRow][0].getPlayer() == player         // 3-in-the-row
+                && cells[currentRow][1].getPlayer() == player
+                && cells[currentRow][2].getPlayer() == player
+                || cells[0][currentCol].getPlayer() == player      // 3-in-the-column
+                && cells[1][currentCol].getPlayer() == player
+                && cells[2][currentCol].getPlayer() == player
                 || currentRow == currentCol            // 3-in-the-diagonal
-                && cells[0][0].getValue() == player
-                && cells[1][1].getValue() == player
-                && cells[2][2].getValue() == player
+                && cells[0][0].getPlayer() == player
+                && cells[1][1].getPlayer() == player
+                && cells[2][2].getPlayer() == player
                 || currentRow + currentCol == 2    // 3-in-the-opposite-diagonal
-                && cells[0][2].getValue() == player
-                && cells[1][1].getValue() == player
-                && cells[2][0].getValue() == player);
+                && cells[0][2].getPlayer() == player
+                && cells[1][1].getPlayer() == player
+                && cells[2][0].getPlayer() == player);
     }
 
     private void flipCurrentTurn() {
         currentTurn = currentTurn == X ? O : X;
+    }
+
+    public boolean isGameOver() {
+        for(int i = 0; i < 3; i++) {
+            for(int j = 0; j < 3; j++) {
+                if(cells[i][j].getPlayer() == null) return false ;
+            }
+        }
+        return true;
+    }
+
+    public Player getCurrentTurn() {
+        return currentTurn;
     }
 
 }

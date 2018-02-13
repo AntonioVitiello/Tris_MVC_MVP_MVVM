@@ -6,13 +6,13 @@ package com.acme.tictactoe.mvvm.model;
 
 public class Cell {
 
-    private Player value;
+    private Player player;
 
-    public Player getValue() {
-        return value;
+    public Player getPlayer() {
+        return this.player;
     }
 
-    public void setValue(Player value) {
-        this.value = value;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 }

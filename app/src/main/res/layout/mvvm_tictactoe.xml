@@ -106,7 +106,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="@{viewModel.winner != null ? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewModel.currentTurn == null ? View.GONE : View.VISIBLE}"
             tools:visibility="visible"
             >
 
@@ -116,6 +116,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="40sp"
                 android:layout_margin="20dp"
+                android:text="@{viewModel.currentTurn}"
                 tools:text="X" />
 
             <TextView
@@ -132,7 +133,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="@{viewModel.winner != null ? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewModel.gemeOver != null ? View.VISIBLE : View.GONE}"
             >
 
             <TextView

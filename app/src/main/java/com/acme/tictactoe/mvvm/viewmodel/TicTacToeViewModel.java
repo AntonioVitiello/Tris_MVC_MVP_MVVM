@@ -12,11 +12,13 @@ import com.acme.tictactoe.mvvm.model.Board;
 import com.acme.tictactoe.mvvm.model.Player;
 
 public class TicTacToeViewModel implements MVVMContract.ViewModel {
-
     private Board model;
 
     public final ObservableArrayMap<String, String> cells = new ObservableArrayMap<>();
     public final ObservableField<String> winner = new ObservableField<>();
+    public final ObservableField<String> currentTurn = new ObservableField<>();
+    public final ObservableField<Boolean> gemeOver = new ObservableField<>();
+
 
     public TicTacToeViewModel() {
         model = new Board();
@@ -24,7 +26,7 @@ public class TicTacToeViewModel implements MVVMContract.ViewModel {
 
     @Override
     public void onCreate() {
-
+        currentTurn.set(model.getCurrentTurn().toString());
     }
 
     @Override
@@ -45,6 +47,7 @@ public class TicTacToeViewModel implements MVVMContract.ViewModel {
     public void onResetSelected() {
         model.restart();
         winner.set(null);
+        currentTurn.set(model.getCurrentTurn().toString());
         cells.clear();
     }
 
@@ -55,8 +58,29 @@ public class TicTacToeViewModel implements MVVMContract.ViewModel {
      */
     public void onClickCell(int row, int col) {
         Player playerThatMoved = model.mark(row, col);
-        cells.put("" + row + col, playerThatMoved == null ? null : playerThatMoved.toString());
-        winner.set(model.getWinner() == null ? null : model.getWinner().toString());
+
+        if(playerThatMoved != null) {
+
+            // Player(OX) moved: set ObservableArrayMap cells
+            String cellsKey = Integer.toString(row) + Integer.toString(col); //example: cellsKey="00" or cellsKey="22"...
+            String cellsValue = playerThatMoved == null ? null : playerThatMoved.toString();
+            cells.put(cellsKey, cellsValue);
+
+            if (model.getWinner() != null) {
+                // (OX) Win this game!
+                winner.set(model.getWinner().toString());
+                currentTurn.set(null);
+            } else if(model.isGameOver()){
+                    // GAME OVER, Press RESET to start a new game: set ObservableField(s)
+                    currentTurn.set(null);
+                    gemeOver.set(Boolean.TRUE);
+                } else {
+                    // (OX) Now is your turn: set ObservableField(s)
+                    gemeOver.set(Boolean.FALSE);
+                    winner.set(null);
+                    currentTurn.set(model.getCurrentTurn().toString());
+                }
+            }
     }
 
 }
