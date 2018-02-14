@@ -19,8 +19,6 @@ public class TicTacToeViewModel implements MVVMContract.ViewModel {
     public final ObservableField<String> currentTurn = new ObservableField<>();
     public final ObservableField<Boolean> gameOver = new ObservableField<>();
 
-    public final ObservableField<Boolean> playerTurnVisibility = new ObservableField<>();
-
 
     public TicTacToeViewModel() {
         model = new Board();
