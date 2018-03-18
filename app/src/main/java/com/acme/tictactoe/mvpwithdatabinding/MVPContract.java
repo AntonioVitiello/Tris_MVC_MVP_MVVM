@@ -12,13 +12,17 @@ public interface MVPContract {
     }
 
     interface Presenter extends BasePresenter {
-        public void onResetSelected();
-        public void onClickCell(int row, int col);
+        void onResetSelected();
 
-        public ObservableArrayMap<String, String> getCells();
-        public ObservableField<String> getWinner();
-        public ObservableField<String> getCurrentTurn();
-        public ObservableField<Boolean> getGameOver();
+        void onClickCell(int row, int col);
+
+        ObservableArrayMap<String, String> getCells();
+
+        ObservableField<String> getWinner();
+
+        ObservableField<String> getCurrentTurn();
+
+        ObservableField<Boolean> getGameOver();
     }
 
 }
