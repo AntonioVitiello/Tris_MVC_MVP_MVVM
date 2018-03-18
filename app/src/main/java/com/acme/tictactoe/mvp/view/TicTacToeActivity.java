@@ -18,12 +18,10 @@ import com.acme.tictactoe.mvp.presenter.TicTacToePresenter;
 public class TicTacToeActivity extends AppCompatActivity implements MVPContract.View {
 
     private static String TAG = TicTacToeActivity.class.getName();
-
+    MVPContract.Presenter presenter;
     private ViewGroup buttonGrid;
     private View winnerPlayerViewGroup;
     private TextView winnerPlayerLabel;
-
-    MVPContract.Presenter presenter;
     private View playerTurnViewGroup;
     private TextView playerTurnLabel;
     private View gameOverViewGroup;
@@ -48,6 +46,7 @@ public class TicTacToeActivity extends AppCompatActivity implements MVPContract.
         inflater.inflate(R.menu.mvp_menu_tictactoe, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -61,13 +60,14 @@ public class TicTacToeActivity extends AppCompatActivity implements MVPContract.
 
     /**
      * Button onClick event in mvp_tictactoe.xml
+     *
      * @param v
      */
     public void onClickCell(View v) {
         Button button = (Button) v;
         String tag = button.getTag().toString();
-        int row = Integer.valueOf(tag.substring(0,1));
-        int col = Integer.valueOf(tag.substring(1,2));
+        int row = Integer.valueOf(tag.substring(0, 1));
+        int col = Integer.valueOf(tag.substring(1, 2));
         Log.i(TAG, "Click Row: [" + row + "," + col + "]");
 
         presenter.playerMove(row, col);
@@ -76,7 +76,7 @@ public class TicTacToeActivity extends AppCompatActivity implements MVPContract.
     @Override
     public void setButtonText(int row, int col, String text) {
         Button btn = (Button) buttonGrid.findViewWithTag("" + row + col);
-        if(btn != null) {
+        if (btn != null) {
             btn.setText(text);
         }
     }
@@ -106,7 +106,7 @@ public class TicTacToeActivity extends AppCompatActivity implements MVPContract.
 
     @Override
     public void clearButtons() {
-        for( int i = 0; i < buttonGrid.getChildCount(); i++ ) {
+        for (int i = 0; i < buttonGrid.getChildCount(); i++) {
             ((Button) buttonGrid.getChildAt(i)).setText("");
         }
     }

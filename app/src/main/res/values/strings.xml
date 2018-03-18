@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">TicTacToe</string>
+    <string name="app_name_mvp_databinding">TicTacToe(MVP &amp; DataBinding)</string>
     <string name="winner">Win this game!</string>
     <string name="action_reset">Reset</string>
     <string name="your_turn">Now is your turn</string>

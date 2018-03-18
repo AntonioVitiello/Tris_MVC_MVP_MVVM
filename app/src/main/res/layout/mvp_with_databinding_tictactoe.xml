@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+        <variable name="presenter" type="com.acme.tictactoe.mvpwithdatabinding.MVPContract.Presenter" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/tictactoe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        tools:context="com.acme.tictactoe.presenter.TicTacToeActivity">
+
+        <GridLayout
+            android:id="@+id/buttonGrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:columnCount="3"
+            android:rowCount="3">
+
+            <Button
+                style="@style/tictactoebutton"
+                android:onClick='@{() -> presenter.onClickCell(0,0)}'
+                android:text='@{presenter.cells["00"]}' />
+
+            <Button
+                style="@style/tictactoebutton"
+                android:onClick='@{() -> presenter.onClickCell(0,1)}'
+                android:text='@{presenter.cells["01"]}' />
+
+            <Button
+                style="@style/tictactoebutton"
+                android:onClick='@{() -> presenter.onClickCell(0,2)}'
+                android:text='@{presenter.cells["02"]}' />
+
+            <Button
+                style="@style/tictactoebutton"
+                android:onClick='@{() -> presenter.onClickCell(1,0)}'
+                android:text='@{presenter.cells["10"]}' />
+
+            <Button
+                style="@style/tictactoebutton"
+                android:onClick='@{() -> presenter.onClickCell(1,1)}'
+                android:text='@{presenter.cells["11"]}' />
+
+            <Button
+                style="@style/tictactoebutton"
+                android:onClick='@{() -> presenter.onClickCell(1,2)}'
+                android:text='@{presenter.cells["12"]}' />
+
+            <Button
+                style="@style/tictactoebutton"
+                android:onClick='@{() -> presenter.onClickCell(2,0)}'
+                android:text='@{presenter.cells["20"]}' />
+
+            <Button
+                style="@style/tictactoebutton"
+                android:onClick='@{() -> presenter.onClickCell(2,1)}'
+                android:text='@{presenter.cells["21"]}' />
+
+            <Button
+                style="@style/tictactoebutton"
+                android:onClick='@{() -> presenter.onClickCell(2,2)}'
+                android:text='@{presenter.cells["22"]}' />
+
+        </GridLayout>
+
+        <LinearLayout
+            android:id="@+id/winnerPlayerViewGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility='@{presenter.winner != null ? View.VISIBLE : View.GONE}'
+            >
+
+            <TextView
+                android:id="@+id/winnerPlayerLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:textSize="40sp"
+                android:text='@{presenter.winner}'
+                tools:text="X" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/winner"
+                android:textSize="30sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/playerTurnViewGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility='@{presenter.currentTurn == null ? View.GONE : View.VISIBLE}'
+            tools:visibility="visible"
+            >
+
+            <TextView
+                android:id="@+id/playerTurnLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="40sp"
+                android:layout_margin="20dp"
+                android:text='@{presenter.currentTurn}'
+                tools:text="X" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:text="@string/your_turn"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/gameOverViewGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility='@{presenter.gameOver != null ? View.VISIBLE : View.GONE}'
+            >
+            <!--ObservableField<Boolean> gameOverVisibility = new ObservableField<>();-->
+            <!--android:visibility='@{presenter.gameOverVisibility ? View.VISIBLE : View.GONE}'-->
+
+            <TextView
+                android:id="@+id/gameOverLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:layout_margin="20dp"
+                android:text="@string/game_over" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:text="@string/press_reset" />
+            />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

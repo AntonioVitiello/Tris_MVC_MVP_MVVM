@@ -10,15 +10,25 @@
         android:theme="@style/AppTheme">
 
         <!--MVC pattern example-->
-        <activity android:name=".mvc.controller.TicTacToeActivity" android:screenOrientation="portrait">
-        </activity>
+        <activity
+            android:name=".mvc.controller.TicTacToeActivity"
+            android:screenOrientation="portrait" />
 
         <!--MVP pattern example-->
-        <activity android:name=".mvp.view.TicTacToeActivity" android:screenOrientation="portrait">
-        </activity>
+        <activity
+            android:name=".mvp.view.TicTacToeActivity"
+            android:screenOrientation="portrait" />
 
         <!--MVVM pattern example-->
-        <activity android:name=".mvvm.view.TicTacToeActivity" android:screenOrientation="portrait">
+        <activity
+            android:name=".mvvm.view.TicTacToeActivity"
+            android:screenOrientation="portrait" />
+
+        <!--MVVM pattern example-->
+        <activity
+            android:name=".mvpwithdatabinding.view.TicTacToeActivity"
+            android:label="@string/app_name_mvp_databinding"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

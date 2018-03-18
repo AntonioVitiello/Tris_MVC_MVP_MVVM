@@ -1,47 +1,31 @@
-package com.acme.tictactoe.mvvm.viewmodel;
-
-/**
- * Created by Antonio on 13/02/2018.
- */
+package com.acme.tictactoe.mvpwithdatabinding.presenter;
 
 import android.databinding.ObservableArrayMap;
 import android.databinding.ObservableField;
 
-import com.acme.tictactoe.mvvm.MVVMContract;
-import com.acme.tictactoe.mvvm.model.Board;
-import com.acme.tictactoe.mvvm.model.Player;
+import com.acme.tictactoe.mvpwithdatabinding.MVPContract;
+import com.acme.tictactoe.mvpwithdatabinding.model.Board;
+import com.acme.tictactoe.mvpwithdatabinding.model.Player;
 
-public class TicTacToeViewModel implements MVVMContract.ViewModel {
+public class TicTacToePresenter implements MVPContract.Presenter {
+    private static final String LOG_TAG = "TicTacToePresenter";
+    private MVPContract.View view;
     private Board model;
 
-    public final ObservableArrayMap<String, String> cells = new ObservableArrayMap<>();
-    public final ObservableField<String> winner = new ObservableField<>();
-    public final ObservableField<String> currentTurn = new ObservableField<>();
-    public final ObservableField<Boolean> gameOver = new ObservableField<>();
+    private final ObservableArrayMap<String, String> cells = new ObservableArrayMap<>();
+    private final ObservableField<String> winner = new ObservableField<>();
+    private final ObservableField<String> currentTurn = new ObservableField<>();
+    private final ObservableField<Boolean> gameOver = new ObservableField<>();
 
 
-    public TicTacToeViewModel() {
-        model = new Board();
+    public TicTacToePresenter(MVPContract.View view) {
+        this.view = view;
+        this.model = new Board();
     }
 
     @Override
-    public void onCreate() {
+    public void start() {
         currentTurn.set(model.getCurrentTurn().toString());
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onDestroy() {
-
     }
 
     /**
@@ -74,16 +58,16 @@ public class TicTacToeViewModel implements MVVMContract.ViewModel {
                 winner.set(model.getWinner().toString());
                 currentTurn.set(null);
             } else if(model.isGameOver()){
-                    // GAME OVER, Press RESET to start a new game: update the observable fields with the current model state
-                    currentTurn.set(null);
-                    gameOver.set(Boolean.TRUE);
-                } else {
-                    // Player(OX) Now is your turn: update the observable fields with the current model state
-                    gameOver.set(Boolean.FALSE);
-                    winner.set(null);
-                    currentTurn.set(model.getCurrentTurn().toString());
-                }
+                // GAME OVER, Press RESET to start a new game: update the observable fields with the current model state
+                currentTurn.set(null);
+                gameOver.set(Boolean.TRUE);
+            } else {
+                // Player(OX) Now is your turn: update the observable fields with the current model state
+                gameOver.set(Boolean.FALSE);
+                winner.set(null);
+                currentTurn.set(model.getCurrentTurn().toString());
             }
+        }
     }
 
     public ObservableArrayMap<String, String> getCells() {
@@ -101,4 +85,5 @@ public class TicTacToeViewModel implements MVVMContract.ViewModel {
     public ObservableField<Boolean> getGameOver() {
         return gameOver;
     }
+
 }

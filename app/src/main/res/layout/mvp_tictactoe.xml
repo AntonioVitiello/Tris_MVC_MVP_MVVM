@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tictactoe"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:gravity="center_horizontal"
     tools:context=".mvp.view.TicTacToeActivity">
 
     <GridLayout
@@ -20,60 +20,51 @@
         android:rowCount="3">
 
         <Button
+            style="@style/tictactoebutton"
+            android:onClick="onClickCell"
             android:tag="00"
-            android:onClick="onClickCell"
-            style="@style/tictactoebutton"
-            tools:text="X"
-            />
+            tools:text="X" />
 
         <Button
+            style="@style/tictactoebutton"
+            android:onClick="onClickCell"
             android:tag="01"
-            android:onClick="onClickCell"
-            style="@style/tictactoebutton"
-            tools:text="O"
-            />
+            tools:text="O" />
 
         <Button
-            android:tag="02"
-            android:onClick="onClickCell"
             style="@style/tictactoebutton"
-            />
+            android:onClick="onClickCell"
+            android:tag="02" />
 
         <Button
-            android:tag="10"
-            android:onClick="onClickCell"
             style="@style/tictactoebutton"
-            />
+            android:onClick="onClickCell"
+            android:tag="10" />
 
         <Button
-            android:tag="11"
-            android:onClick="onClickCell"
             style="@style/tictactoebutton"
-            />
+            android:onClick="onClickCell"
+            android:tag="11" />
 
         <Button
-            android:tag="12"
-            android:onClick="onClickCell"
             style="@style/tictactoebutton"
-            />
+            android:onClick="onClickCell"
+            android:tag="12" />
 
         <Button
-            android:tag="20"
-            android:onClick="onClickCell"
             style="@style/tictactoebutton"
-            />
+            android:onClick="onClickCell"
+            android:tag="20" />
 
         <Button
-            android:tag="21"
-            android:onClick="onClickCell"
             style="@style/tictactoebutton"
-            />
+            android:onClick="onClickCell"
+            android:tag="21" />
 
         <Button
-            android:tag="22"
-            android:onClick="onClickCell"
             style="@style/tictactoebutton"
-            />
+            android:onClick="onClickCell"
+            android:tag="22" />
 
     </GridLayout>
 
@@ -83,23 +74,21 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/winnerPlayerLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="40sp"
             android:layout_margin="20dp"
+            android:textSize="40sp"
             tools:text="X" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
             android:text="@string/winner"
-            />
+            android:textSize="30sp" />
 
     </LinearLayout>
 
@@ -108,23 +97,21 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/playerTurnLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="40sp"
             android:layout_margin="20dp"
+            android:textSize="40sp"
             tools:text="X" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
             android:text="@string/your_turn"
-            />
+            android:textSize="30sp" />
 
     </LinearLayout>
 
@@ -134,23 +121,21 @@
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/gameOverLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="24sp"
             android:layout_margin="20dp"
-            android:text="@string/game_over" />
+            android:text="@string/game_over"
+            android:textSize="24sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="@string/press_reset" />
-            />
+            android:text="@string/press_reset"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
