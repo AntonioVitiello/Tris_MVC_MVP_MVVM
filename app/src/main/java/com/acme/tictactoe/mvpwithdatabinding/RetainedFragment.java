@@ -17,10 +17,12 @@ public class RetainedFragment extends Fragment {
         setRetainInstance(true);
     }
 
+    public MVPContract.Presenter getPresenter() {
+        return mPresenter;
+    }
+
     public void setPresenter(MVPContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
-    public MVPContract.Presenter getPresenter() {
-        return mPresenter;
-    }}
+}
