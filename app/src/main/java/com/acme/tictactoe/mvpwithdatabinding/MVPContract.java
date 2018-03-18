@@ -8,13 +8,16 @@ import android.databinding.ObservableField;
  */
 
 public interface MVPContract {
-    interface View extends BaseView<Presenter> {
+    interface View {
+        void setPresenter(Presenter presenter);
     }
 
-    interface Presenter extends BasePresenter {
+    interface Presenter {
         void onResetSelected();
 
         void onClickCell(int row, int col);
+
+        void start();
 
         ObservableArrayMap<String, String> getCells();
 
