@@ -2,6 +2,7 @@ package com.acme.tictactoe.mvpwithdatabinding;
 
 import android.databinding.ObservableArrayMap;
 import android.databinding.ObservableField;
+import android.support.v4.app.FragmentManager;
 
 /**
  * Created by Antonio on 12/02/2018.
@@ -9,7 +10,7 @@ import android.databinding.ObservableField;
 
 public interface MVPContract {
     interface View {
-        void setPresenter(Presenter presenter);
+        void setPresenter(MVPContract.Presenter presenter);
     }
 
     interface Presenter {
@@ -26,6 +27,8 @@ public interface MVPContract {
         ObservableField<String> getCurrentTurn();
 
         ObservableField<Boolean> getGameOver();
+
+        MVPContract.View nextFragment(FragmentManager supportFragmentManager);
     }
 
 }

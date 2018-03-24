@@ -1,53 +1,51 @@
 package com.acme.tictactoe.mvpwithdatabinding;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-
-import com.acme.tictactoe.mvpwithdatabinding.presenter.PresenterTicTacToe;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 /**
- * Created by Antonio on 18/03/2018.
+ * Created by Vitiello Antonio on 24/03/2018.
  */
 
-public class BaseActivity extends AppCompatActivity implements MVPContract.View {
-    private static final String LOG_TAG = "BaseActivity";
-    private static final String TAG_RETAINED_FRAGMENT = "RetainedFragment";
+public abstract class BaseFragment  extends Fragment implements MVPContract.View {
+    private static final String LOG_TAG = "BaseFragment";
+    private static final String TAG_RETAINED_FRAGMENT = "FragmentRetainedFragment";
     private RetainedFragment mRetainedFragment;
+    private MVPContract.Presenter mPresenter;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
 
         // find the retained fragment on activity restarts
-        FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getFragmentManager();
         mRetainedFragment = (RetainedFragment) fm.findFragmentByTag(TAG_RETAINED_FRAGMENT);
 
         // create the fragment and data the first time
         if (mRetainedFragment == null) {
             mRetainedFragment = new RetainedFragment();
             fm.beginTransaction().add(mRetainedFragment, TAG_RETAINED_FRAGMENT).commit();
-            mRetainedFragment.setPresenter(new PresenterTicTacToe(this));
+            setPresenter(mPresenter);
         }
 
-        setPresenter(mRetainedFragment.getPresenter());
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        getPresenter().start();
+        return rootView;
     }
 
     @Override
     public void onPause() {
         super.onPause();
         // if this activity will not be recreated, ie. user is leaving it or the activity is otherwise finishing
-        Log.d(LOG_TAG, "onPause: isFinishing() = " + isFinishing());
-        if (isFinishing()) {
+        Log.d(LOG_TAG, "onPause: isRemoving() = " + isRemoving());
+        if (isRemoving()) {
             // remove retained fragment object to perform its own cleanup
-            FragmentManager fm = getSupportFragmentManager();
+            FragmentManager fm = getFragmentManager();
             fm.beginTransaction().remove(mRetainedFragment).commit();
         }
     }
@@ -58,7 +56,11 @@ public class BaseActivity extends AppCompatActivity implements MVPContract.View 
 
     @Override
     public void setPresenter(MVPContract.Presenter presenter) {
-        mRetainedFragment.setPresenter(presenter);
+        if(mRetainedFragment != null) {
+            mRetainedFragment.setPresenter(presenter);
+        } else {
+            mPresenter = presenter;
+        }
     }
 
 }

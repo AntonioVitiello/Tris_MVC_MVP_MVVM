@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="presenter"
+            type="com.acme.tictactoe.mvpwithdatabinding.MVPContract.Presenter" />
+    </data>
+
+    <GridLayout
+        android:id="@+id/buttonGrid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="3">
+
+        <Button
+            style="@style/tictactoebutton"
+            android:onClick='@{() -> presenter.onClickCell(0,0)}'
+            android:text='@{presenter.cells["00"]}' />
+
+        <Button
+            style="@style/tictactoebutton"
+            android:onClick='@{() -> presenter.onClickCell(0,1)}'
+            android:text='@{presenter.cells["01"]}' />
+
+        <Button
+            style="@style/tictactoebutton"
+            android:onClick='@{() -> presenter.onClickCell(0,2)}'
+            android:text='@{presenter.cells["02"]}' />
+
+        <Button
+            style="@style/tictactoebutton"
+            android:onClick='@{() -> presenter.onClickCell(1,0)}'
+            android:text='@{presenter.cells["10"]}' />
+
+        <Button
+            style="@style/tictactoebutton"
+            android:onClick='@{() -> presenter.onClickCell(1,1)}'
+            android:text='@{presenter.cells["11"]}' />
+
+        <Button
+            style="@style/tictactoebutton"
+            android:onClick='@{() -> presenter.onClickCell(1,2)}'
+            android:text='@{presenter.cells["12"]}' />
+
+        <Button
+            style="@style/tictactoebutton"
+            android:onClick='@{() -> presenter.onClickCell(2,0)}'
+            android:text='@{presenter.cells["20"]}' />
+
+        <Button
+            style="@style/tictactoebutton"
+            android:onClick='@{() -> presenter.onClickCell(2,1)}'
+            android:text='@{presenter.cells["21"]}' />
+
+        <Button
+            style="@style/tictactoebutton"
+            android:onClick='@{() -> presenter.onClickCell(2,2)}'
+            android:text='@{presenter.cells["22"]}' />
+
+    </GridLayout>
+</layout>

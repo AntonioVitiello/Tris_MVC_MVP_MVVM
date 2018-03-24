@@ -1,6 +1,8 @@
 package com.acme.tictactoe.mvp.presenter;
 
 
+import com.acme.tictactoe.mvp.view.TicTacToeActivity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,12 +17,12 @@ import static org.mockito.Mockito.verify;
  * There are a lot more tests we can and should write but for now, just a few smoke tests.
  */
 @RunWith(MockitoJUnitRunner.class)
-public class TicTacToePresenterTests {
+public class PresenterTicTacToeTests {
 
     private TicTacToePresenter presenter;
 
     @Mock
-    private TicTacToeView view;
+    private TicTacToeActivity view;
 
     @Before
     public void setup() {

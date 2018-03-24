@@ -22,65 +22,17 @@
             android:layout_height="match_parent"
             android:gravity="center_horizontal"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/activity_vertical_margin"
-            android:paddingLeft="@dimen/activity_horizontal_margin"
-            android:paddingRight="@dimen/activity_horizontal_margin"
-            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin_o"
+            android:paddingLeft="@dimen/activity_horizontal_margin_o"
+            android:paddingRight="@dimen/activity_horizontal_margin_o"
+            android:paddingTop="@dimen/activity_vertical_margin_o"
             tools:context="com.acme.tictactoe.presenter.TicTacToeActivity">
 
-            <GridLayout
-                android:id="@+id/buttonGrid"
+            <FrameLayout
+                android:id="@+id/buttons_fragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:columnCount="3"
-                android:rowCount="3">
-
-                <Button
-                    style="@style/tictactoebutton"
-                    android:onClick='@{() -> presenter.onClickCell(0,0)}'
-                    android:text='@{presenter.cells["00"]}' />
-
-                <Button
-                    style="@style/tictactoebutton"
-                    android:onClick='@{() -> presenter.onClickCell(0,1)}'
-                    android:text='@{presenter.cells["01"]}' />
-
-                <Button
-                    style="@style/tictactoebutton"
-                    android:onClick='@{() -> presenter.onClickCell(0,2)}'
-                    android:text='@{presenter.cells["02"]}' />
-
-                <Button
-                    style="@style/tictactoebutton"
-                    android:onClick='@{() -> presenter.onClickCell(1,0)}'
-                    android:text='@{presenter.cells["10"]}' />
-
-                <Button
-                    style="@style/tictactoebutton"
-                    android:onClick='@{() -> presenter.onClickCell(1,1)}'
-                    android:text='@{presenter.cells["11"]}' />
-
-                <Button
-                    style="@style/tictactoebutton"
-                    android:onClick='@{() -> presenter.onClickCell(1,2)}'
-                    android:text='@{presenter.cells["12"]}' />
-
-                <Button
-                    style="@style/tictactoebutton"
-                    android:onClick='@{() -> presenter.onClickCell(2,0)}'
-                    android:text='@{presenter.cells["20"]}' />
-
-                <Button
-                    style="@style/tictactoebutton"
-                    android:onClick='@{() -> presenter.onClickCell(2,1)}'
-                    android:text='@{presenter.cells["21"]}' />
-
-                <Button
-                    style="@style/tictactoebutton"
-                    android:onClick='@{() -> presenter.onClickCell(2,2)}'
-                    android:text='@{presenter.cells["22"]}' />
-
-            </GridLayout>
+                android:layout_gravity="center" />
 
             <LinearLayout
                 android:id="@+id/winnerPlayerViewGroup"
@@ -138,9 +90,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:orientation="vertical"
-                android:visibility='@{presenter.gameOver != null ? View.VISIBLE : View.GONE}'>
-                <!--ObservableField<Boolean> gameOverVisibility = new ObservableField<>();-->
-                <!--android:visibility='@{presenter.gameOverVisibility ? View.VISIBLE : View.GONE}'-->
+                android:visibility='@{presenter.gameOver ? View.VISIBLE : View.GONE}'>
 
                 <TextView
                     android:id="@+id/gameOverLabel"
@@ -155,7 +105,6 @@
                     android:layout_height="wrap_content"
                     android:text="@string/press_reset"
                     android:textSize="12sp" />
-                />
 
             </LinearLayout>
         </LinearLayout>
